@@ -22,7 +22,7 @@ public class DownloadExcelController {
 	public void downloadWxcelFile(HttpServletResponse response) throws IOException {
 		response.setContentType("application/octel-stream");
 		response.setHeader("Contenet-Disposition", "attachment; filename=employee.xlsx");
-		
+		System.out.println("---------------------------");
 		ByteArrayInputStream inputStream = excelFileExporter.exportAllEmployee();
 		IOUtils.copy(inputStream, response.getOutputStream());
 		

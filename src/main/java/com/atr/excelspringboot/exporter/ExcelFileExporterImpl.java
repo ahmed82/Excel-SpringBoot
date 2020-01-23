@@ -56,11 +56,11 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 
 			// Creating data row for each Employy object
 			for (int i = 0; i < employees.size(); i++) {
-				Row dataRow = sheet.createRow(i + 1);
+				Row dataRow = sheet.createRow(i + 1);// to exclude the header row
 				dataRow.createCell(0).setCellValue(employees.get(i).getId());
 				dataRow.createCell(1).setCellValue(employees.get(i).getFirst_name());
-				dataRow.createCell(1).setCellValue(employees.get(i).getLast_name());
-				dataRow.createCell(1).setCellValue(employees.get(i).getEmail());
+				dataRow.createCell(2).setCellValue(employees.get(i).getLast_name());
+				dataRow.createCell(3).setCellValue(employees.get(i).getEmail());
 			}
 
 			// Auto size Excel cell for populated data
@@ -68,6 +68,8 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 			sheet.autoSizeColumn(1);
 			sheet.autoSizeColumn(2);
 			sheet.autoSizeColumn(3);
+			
+			System.out.println("************************"+employeeService.getAllEmployees());
 
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
