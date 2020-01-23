@@ -1,5 +1,6 @@
 package com.atr.excelspringboot.exporter;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 	EmployeeService employeeService;
 
 	@Override
-	public void /*ByteArrayInputStream*/ exportAllEmployee() {
+	public ByteArrayInputStream exportAllEmployee() {
 		try {
 			Workbook workbook = new XSSFWorkbook();
 			Sheet sheet = workbook.createSheet();
@@ -72,13 +73,16 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 
 			workbook.write(outputStream);
 			
-			outputStream.close();
-	        workbook.close();
+			return new ByteArrayInputStream(outputStream.toByteArray());
+			//outputStream.close();
+	       // workbook.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
+		
 
 		//return null;
 	}

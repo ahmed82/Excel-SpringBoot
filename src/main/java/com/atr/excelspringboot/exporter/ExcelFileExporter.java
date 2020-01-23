@@ -1,8 +1,10 @@
 package com.atr.excelspringboot.exporter;
 
+import java.io.ByteArrayInputStream;
+
 public interface ExcelFileExporter {
 
 		
-		void exportAllEmployee();
+		ByteArrayInputStream exportAllEmployee();
 
 }
