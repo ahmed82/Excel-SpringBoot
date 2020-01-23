@@ -1,7 +1,12 @@
 package com.atr.excelspringboot.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Employee {
 	
+	@Id
 	private int id;
 	private String first_name;
 	private String last_name;
