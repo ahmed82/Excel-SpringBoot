@@ -5,6 +5,6 @@ import java.io.ByteArrayInputStream;
 public interface ExcelFileExporter {
 
 		
-		ByteArrayInputStream exportAllEmployee();
+		ByteArrayInputStream exportAllEmployee()throws Exception;
 
 }

@@ -26,19 +26,28 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 	EmployeeService employeeService;
 
 	@Override
-	public ByteArrayInputStream exportAllEmployee() {
-		try {
+	public ByteArrayInputStream exportAllEmployee() throws Exception {
+		 
 			Workbook workbook = new XSSFWorkbook();
-			Sheet sheet = workbook.createSheet();
+			Sheet sheet = workbook.createSheet("Employees info");
 
 			Row row = sheet.createRow(0);
+			
 			CellStyle headerCellStyle = workbook.createCellStyle();
 			headerCellStyle.setFillForegroundColor(IndexedColors.AQUA.getIndex());
 			headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-
-			List<Employee> employees = employeeService.getAllEmployees();
+			
+			String[] columns = {"id","Firt Name","Last Name","Email"};
+			
+			// Creating Excel Header from the columns array
+			for (int i = 0; i < columns.length; i++) {
+				Cell cell = row.createCell(i);
+				cell.setCellValue(columns[i]);
+				cell.setCellStyle(headerCellStyle);
+			}
+			
 			// Creating Excel Header
-			Cell cell = row.createCell(0);
+		/*	Cell cell = row.createCell(0);
 			cell.setCellValue("Employye Number");
 			cell.setCellStyle(headerCellStyle);
 
@@ -52,9 +61,12 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 
 			cell = row.createCell(3);
 			cell.setCellValue("Email");
-			cell.setCellStyle(headerCellStyle);
+			cell.setCellStyle(headerCellStyle);*/
 
 			// Creating data row for each Employy object
+			
+			List<Employee> employees = employeeService.getAllEmployees();
+			
 			for (int i = 0; i < employees.size(); i++) {
 				Row dataRow = sheet.createRow(i + 1);// to exclude the header row
 				dataRow.createCell(0).setCellValue(employees.get(i).getId());
@@ -64,29 +76,23 @@ public class ExcelFileExporterImpl implements ExcelFileExporter {
 			}
 
 			// Auto size Excel cell for populated data
-			sheet.autoSizeColumn(0);
+			for (int i = 0; i < columns.length; i++) {
+				sheet.autoSizeColumn(i);
+			}
+			/*sheet.autoSizeColumn(0);
 			sheet.autoSizeColumn(1);
 			sheet.autoSizeColumn(2);
-			sheet.autoSizeColumn(3);
+			sheet.autoSizeColumn(3);*/
 			
 			System.out.println("************************"+employeeService.getAllEmployees());
 
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
 			workbook.write(outputStream);
-			
+			workbook.close();
 			return new ByteArrayInputStream(outputStream.toByteArray());
 			//outputStream.close();
-	       // workbook.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-		
 
-		//return null;
 	}
 
 }
