@@ -16,7 +16,8 @@ public class CreateDocument {
 	
 	public void newDocument() throws IOException{
 	//Blank Document
-    XWPFDocument document = new XWPFDocument(); 
+    @SuppressWarnings("resource")
+	XWPFDocument document = new XWPFDocument(); 
 		
     //Write the Document in file system
     FileOutputStream out = new FileOutputStream( new File("createdocument.docx"));

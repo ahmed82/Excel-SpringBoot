@@ -26,7 +26,6 @@ public class DownloadExcelController {
 	public void downloadExcelFile(HttpServletResponse response) throws Exception {
 		response.setContentType("application/octel-stream");
 		response.setHeader("Contenet-Disposition", "attachment; filename=employee.xlsx");
-		System.out.println("---------------------------");
 		ByteArrayInputStream inputStream = excelFileExporter.exportAllEmployee();
 		IOUtils.copy(inputStream, response.getOutputStream());
 
