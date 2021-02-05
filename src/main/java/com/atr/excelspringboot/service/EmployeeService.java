@@ -14,7 +14,8 @@ public class EmployeeService {
 		List<Employee> employee = new ArrayList<Employee>();
 		employee.add(new Employee(1, "Ahmed", "Al Salih", "a.alsalih2@gmail.com"));
 		employee.add(new Employee(2, "Omar", "Al Salih", "o.alsalih2@gmail.com"));
-		employee.add(new Employee(3, "Abdul Rahman", "Al Salih", "abdul.alsalih2@gmail.com"));
+		employee.add(new Employee(3, "Abdul Rahman", "Al Salih", "x@gmail.com"));
+		employee.add(new Employee(4, "Mohammed", "Al Salih", "x@gmail.com"));
 		return employee;
 		
 	}
